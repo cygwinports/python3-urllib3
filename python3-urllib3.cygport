@@ -14,3 +14,5 @@ PATCH_URI="
 "
 
 DISTCLEANFILES="urllib3/packages/ordered_dict.py urllib3/packages/six.py"
+
+REQUIRES="ca-certificates"
