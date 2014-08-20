@@ -1,7 +1,7 @@
 inherit python3-distutils
 
 NAME="python3-urllib3"
-VERSION=1.7.1
+VERSION=1.8.2
 RELEASE=1
 CATEGORY="Python"
 SUMMARY="Python3 HTTP/HTTPS library"
@@ -9,10 +9,8 @@ DESCRIPTION="HTTP library for Python with thread-safe connection pooling,
 file post, and more."
 
 PATCH_URI="
-	1.7.1-ca-certificates.patch
-	1.7.1-system-deps.patch
+	http://pkgs.fedoraproject.org/cgit/python-urllib3.git/plain/python-urllib3-unbundle.patch
+	1.8.2-disable-contrib.patch
 "
-
-DISTCLEANFILES="urllib3/packages/ordered_dict.py urllib3/packages/six.py"
 
 REQUIRES="ca-certificates"
