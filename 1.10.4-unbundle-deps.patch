@@ -1,0 +1,114 @@
+--- origsrc/urllib3-1.10.4/setup.py	2015-04-01 17:24:02.000000000 -0500
++++ src/urllib3-1.10.4/setup.py	2015-05-05 22:04:51.622318200 -0500
+@@ -42,8 +42,7 @@ setup(name='urllib3',
+       url='http://urllib3.readthedocs.org/',
+       license='MIT',
+       packages=['urllib3',
+-                'urllib3.packages', 'urllib3.packages.ssl_match_hostname',
+-                'urllib3.contrib', 'urllib3.util',
++                'urllib3.util',
+                 ],
+       requires=[],
+       tests_require=[
+--- origsrc/urllib3-1.10.4/urllib3/_collections.py	2015-04-21 15:05:36.000000000 -0500
++++ src/urllib3-1.10.4/urllib3/_collections.py	2015-05-05 22:03:37.051849000 -0500
+@@ -13,8 +13,8 @@ except ImportError:  # Platform-specific
+ try:  # Python 2.7+
+     from collections import OrderedDict
+ except ImportError:
+-    from .packages.ordered_dict import OrderedDict
+-from .packages.six import iterkeys, itervalues, PY3
++    from ordered_dict import OrderedDict
++from six import iterkeys, itervalues, PY3
+ 
+ 
+ __all__ = ['RecentlyUsedContainer', 'HTTPHeaderDict']
+--- origsrc/urllib3-1.10.4/urllib3/connection.py	2015-04-21 15:05:36.000000000 -0500
++++ src/urllib3-1.10.4/urllib3/connection.py	2015-05-05 22:02:08.379089000 -0500
+@@ -3,7 +3,7 @@ import sys
+ import socket
+ from socket import timeout as SocketTimeout
+ import warnings
+-from .packages import six
++import six
+ 
+ try:  # Python 3
+     from http.client import HTTPConnection as _HTTPConnection, HTTPException
+@@ -40,7 +40,7 @@ from .exceptions import (
+     SystemTimeWarning,
+     SecurityWarning,
+ )
+-from .packages.ssl_match_hostname import match_hostname
++from ssl import match_hostname
+ 
+ from .util.ssl_ import (
+     resolve_cert_reqs,
+--- origsrc/urllib3-1.10.4/urllib3/connectionpool.py	2015-04-21 15:05:36.000000000 -0500
++++ src/urllib3-1.10.4/urllib3/connectionpool.py	2015-05-05 22:02:23.195970500 -0500
+@@ -26,8 +26,8 @@ from .exceptions import (
+     TimeoutError,
+     InsecureRequestWarning,
+ )
+-from .packages.ssl_match_hostname import CertificateError
+-from .packages import six
++from ssl import CertificateError
++import six
+ from .connection import (
+     port_by_scheme,
+     DummyConnection,
+--- origsrc/urllib3-1.10.4/urllib3/fields.py	2015-04-01 17:24:02.000000000 -0500
++++ src/urllib3-1.10.4/urllib3/fields.py	2015-05-05 22:02:27.766050800 -0500
+@@ -1,7 +1,7 @@
+ import email.utils
+ import mimetypes
+ 
+-from .packages import six
++import six
+ 
+ 
+ def guess_content_type(filename, default='application/octet-stream'):
+--- origsrc/urllib3-1.10.4/urllib3/filepost.py	2015-04-01 17:24:02.000000000 -0500
++++ src/urllib3-1.10.4/urllib3/filepost.py	2015-05-05 22:02:39.502541200 -0500
+@@ -3,8 +3,8 @@ import codecs
+ from uuid import uuid4
+ from io import BytesIO
+ 
+-from .packages import six
+-from .packages.six import b
++import six
++from six import b
+ from .fields import RequestField
+ 
+ writer = codecs.lookup('utf-8')[3]
+--- origsrc/urllib3-1.10.4/urllib3/response.py	2015-05-03 09:12:21.000000000 -0500
++++ src/urllib3-1.10.4/urllib3/response.py	2015-05-05 22:02:47.105506600 -0500
+@@ -10,7 +10,7 @@ from ._collections import HTTPHeaderDict
+ from .exceptions import (
+     ProtocolError, DecodeError, ReadTimeoutError, ResponseNotChunked
+ )
+-from .packages.six import string_types as basestring, binary_type, PY3
++from six import string_types as basestring, binary_type, PY3
+ from .connection import HTTPException, BaseSSLError
+ from .util.response import is_fp_closed
+ 
+--- origsrc/urllib3-1.10.4/urllib3/util/request.py	2015-04-01 17:24:02.000000000 -0500
++++ src/urllib3-1.10.4/urllib3/util/request.py	2015-05-05 22:02:52.146646800 -0500
+@@ -1,6 +1,6 @@
+ from base64 import b64encode
+ 
+-from ..packages.six import b
++from six import b
+ 
+ ACCEPT_ENCODING = 'gzip,deflate'
+ 
+--- origsrc/urllib3-1.10.4/urllib3/util/retry.py	2015-04-01 17:24:02.000000000 -0500
++++ src/urllib3-1.10.4/urllib3/util/retry.py	2015-05-05 22:02:58.178412700 -0500
+@@ -8,7 +8,7 @@ from ..exceptions import (
+     ReadTimeoutError,
+     ResponseError,
+ )
+-from ..packages import six
++import six
+ 
+ 
+ log = logging.getLogger(__name__)

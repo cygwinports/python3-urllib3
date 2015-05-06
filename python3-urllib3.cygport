@@ -1,16 +1,15 @@
 inherit python3-distutils
 
 NAME="python3-urllib3"
-VERSION=1.8.2
+VERSION=1.10.4
 RELEASE=1
 CATEGORY="Python"
 SUMMARY="Python3 HTTP/HTTPS library"
 DESCRIPTION="HTTP library for Python with thread-safe connection pooling,
 file post, and more."
 
-PATCH_URI="
-	http://pkgs.fedoraproject.org/cgit/python-urllib3.git/plain/python-urllib3-unbundle.patch
-	1.8.2-disable-contrib.patch
-"
+PATCH_URI="1.10.4-unbundle-deps.patch"
+
+ARCH=noarch
 
 REQUIRES="ca-certificates"
